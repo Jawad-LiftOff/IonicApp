@@ -47,7 +47,9 @@ angular.module('starter.controllers', [])
 .controller('PlaylistCtrl', function ($scope, $stateParams) {
 })
 
-.controller('EventCtrl', function ($scope, $ionicPopover, $ionicPopup, $timeout) {
+.controller('EventCtrl', function ($scope, $ionicPopup) {
+  
+  $scope.today = new Date();
   $scope.showPopup = function () {
     document.getElementsByTagName('ion-nav-view')[0].classList.add("doBlur");
     $scope.myPopup = $ionicPopup.show({
