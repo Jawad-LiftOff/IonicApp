@@ -1,7 +1,7 @@
 angular.module('starter.controllers', [])
 
 .controller('AppCtrl', function ($scope, $ionicModal, $timeout) {
-  
+
   $scope.loginData = {};
 
   // Create the login modal that we will use later
@@ -51,7 +51,7 @@ angular.module('starter.controllers', [])
   $scope.showPopup = function () {
     document.getElementsByTagName('ion-nav-view')[0].classList.add("doBlur");
     $scope.myPopup = $ionicPopup.show({
-      template: '<div ng-click="closePopup()"><img src="img/ionic.png"></img></div>',
+      template: '<img src="img/promo.png" class="full-image"><span class="close-popup" ng-click="closePopup()">Close</span>',
       scope: $scope
     });
   };
