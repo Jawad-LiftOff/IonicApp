@@ -49,6 +49,7 @@ angular.module('starter.controllers', [])
 
 .controller('EventCtrl', function ($scope, $ionicPopover, $ionicPopup, $timeout) {
   $scope.showPopup = function () {
+    document.getElementsByTagName('ion-nav-view')[0].classList.add("doBlur");
     $scope.myPopup = $ionicPopup.show({
       template: '<div ng-click="closePopup()"><img src="img/ionic.png"></img></div>',
       scope: $scope
@@ -56,6 +57,7 @@ angular.module('starter.controllers', [])
   };
 
   $scope.closePopup = function () {
+    document.getElementsByTagName('ion-nav-view')[0].classList.remove("doBlur");
     $scope.myPopup.close();
   };
 
