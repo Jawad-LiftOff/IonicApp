@@ -35,3 +35,11 @@
   text-align: center;
   text-transform: uppercase;
 }
+
+.bold {
+  font-weight: bolder;
+}
+
+.bigSize {
+  font-size: 24px;
+}

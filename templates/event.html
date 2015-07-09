@@ -1,6 +1,14 @@
 <ion-view view-title="<center>{{ today | date : 'EEE | MMM | dd' }}</center>">
   <ion-content class="app-bg">
-    <h1><img src="img/logo.png" alt="" class="app-logo" /></h1>
+    <h1>
+      <img src="img/logo.png" alt="" class="app-logo" />
+    </h1>
     <img src="img/time-clock.png" alt="" class="full-image time-clock" ng-click="showPopup($event)" />
+    <div class="row row-bottom">
+      <div class="col" ng-class="{bold : day.getDate() == today.getDate()}" ng-repeat="day in daysInWeek track by $index">
+        <span>{{ day.day }}</span>
+        <span class="bigSize">{{ day.getDate() }}</span>          
+      </div>
+    </div>
   </ion-content>
 </ion-view>
