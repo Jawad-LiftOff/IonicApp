@@ -8,8 +8,7 @@ angular.module('dials.controllers', ['dials.services'])
   $scope.init = function () {
     $scope.today = new Date();
     $scope.bold = 'bold';
-    getEvents();
-    $scope.getWeek();
+    getEvents();    
   };
   
   $scope.showPopup = function () {
@@ -25,7 +24,7 @@ angular.module('dials.controllers', ['dials.services'])
     $scope.myPopup.close();
   };
   
-  $scope.getWeek = function () {
+  $scope.getWeekData = function () {
     var days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
     var thisDay = $scope.today.getDay() == 0 ? 7 : $scope.today.getDay();    
     var weekStartDate = $scope.today.getDate() - (thisDay - 1);
@@ -34,7 +33,8 @@ angular.module('dials.controllers', ['dials.services'])
     $scope.daysInWeek = [];  
     for (var i = 0; i < 7; i++) {
       var day = new Date(new Date().setDate(weekStart.getDate() + i)); 
-      day.day = days[i];     
+      day.day = days[i];  
+      day.hasEvent = $scope.eventDates.indexOf(day.getDate()) >= 0;   
       $scope.daysInWeek.push(day);
     }
   };
@@ -42,6 +42,12 @@ angular.module('dials.controllers', ['dials.services'])
   var getEvents = function () {    
     EventsManager.events(function (res) {      
       $scope.events = res;
+      $scope.eventDates = [];
+      for (var i = 0; i < res.length; i++) {        
+        var startDate = new Date(res[i].eventStartTime);        
+        $scope.eventDates.push(startDate.getUTCDate());  
+      }      
+      $scope.getWeekData();
     });
   };
   

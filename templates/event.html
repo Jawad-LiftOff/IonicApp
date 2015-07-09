@@ -7,7 +7,8 @@
     <div class="row row-bottom">
       <div class="col" ng-class="{bold : day.getDate() == today.getDate()}" ng-repeat="day in daysInWeek track by $index">
         <span>{{ day.day }}</span>
-        <span class="bigSize">{{ day.getDate() }}</span>          
+        <span class="bigSize">{{ day.getDate() }}</span>  
+          <span class="red" ng-if="day.hasEvent">evn</span>        
       </div>
     </div>
   </ion-content>
