@@ -7,7 +7,8 @@ angular.module('dials.controllers', ['dials.services'])
   
   $scope.init = function () {
     $scope.today = new Date();
-    $scope.bold = 'bold';
+    $scope.bold = 'bold';   
+    $scope.setDate = new Date();
     getEvents();    
   };
   
@@ -41,14 +42,20 @@ angular.module('dials.controllers', ['dials.services'])
 
   var getEvents = function () {    
     EventsManager.events(function (res) {      
-      $scope.events = res;
       $scope.eventDates = [];
-      for (var i = 0; i < res.length; i++) {        
-        var startDate = new Date(res[i].eventStartTime);        
+      for (var i = 0; i < res.length; i++) {              
+        var startDate = new Date(res[i].eventStartTime);  
+        res[i].date =  startDate.getDate();              
         $scope.eventDates.push(startDate.getUTCDate());  
-      }      
+      }  
+          
+      $scope.events = res;      
       $scope.getWeekData();
     });
+  };
+  
+  $scope.resetDate = function (day) {    
+    $scope.setDate = day;
   };
   
   $scope.init();
