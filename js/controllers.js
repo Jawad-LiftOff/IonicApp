@@ -3,14 +3,14 @@ angular.module('dials.controllers', ['dials.services'])
   .controller('AppCtrl', function ($scope) {
 })
 
-  .controller('EventCtrl', function ($scope, $ionicPopup, $filter, $timeout, DataManager) {
+  .controller('EventCtrl', function ($scope, $ionicPopup, $filter, $interval, DataManager) {
 
   $scope.init = function () {
     $scope.today = new Date();
     $scope.bold = 'bold';
     $scope.setDate = new Date();
     getSchedule();
-    getEvents();
+    getEvents();    
   };
 
   $scope.showPopup = function () {
@@ -36,8 +36,10 @@ angular.module('dials.controllers', ['dials.services'])
     _.each(days, function (d, i) {
       var day = new Date(new Date().setDate(weekStart.getDate() + i));
       day.day = d;
-      var date = (day.getUTCMonth() + 1) + '/' + day.getUTCDate() + '/' + day.getUTCFullYear();
-      var schedules = _.find($scope.schedule, function (data) { return new Date(data.date).toDateString() == new Date(date).toDateString() });
+      var date = (day.getMonth() + 1) + '/' + day.getDate() + '/' + day.getFullYear();
+      var schedules = _.find($scope.schedule, function (data) { 
+                        return new Date(data.date).toDateString() == new Date(date).toDateString() 
+                      });
       day.hasEvent = schedules;
       $scope.daysInWeek.push(day);
     });
@@ -54,14 +56,42 @@ angular.module('dials.controllers', ['dials.services'])
   var getEvents = function () {
     DataManager.events(function (res) {
       _.each(res, function (data) {
-        data.date = new Date(data.start_time).getUTCDate();
+        data.date = new Date(data.start_time).getDate();
       });
       $scope.events = res;
+      countDown();
     });
   };
 
   $scope.resetDate = function (day) {
     $scope.setDate = day;
+  };
+  
+  var getDiffTime = function (ms) {    
+    var daysms=ms % (24*60*60*1000);
+    var hours = Math.floor((daysms)/(60*60*1000));
+    hours = hours < 10 ? '0' + hours : hours;
+    var hoursms=ms % (60*60*1000);
+    var minutes = Math.floor((hoursms)/(60*1000));
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    var minutesms=ms % (60*1000);
+    var sec = Math.floor((minutesms)/(1000));
+    sec = sec < 10 ? '0' + sec : sec;
+    return hours+":"+minutes+":"+sec;
+  };
+  
+  var countDown = function () {
+    var now = new Date();
+    var comingEvents = _.filter($scope.events, function(data) {            
+      return data.start_time > now.getTime(); 
+    });    
+    $scope.nextEvent = _.min(comingEvents, function(data){return data.start_time;});
+    $scope.now = new Date().getTime(); 
+    $interval(function () {    
+      $scope.timeRemaining = getDiffTime($scope.nextEvent.start_time - new Date().getTime());
+      console.log($scope.timeRemaining);
+    }, 1000);
+    
   };
 
   $scope.init();

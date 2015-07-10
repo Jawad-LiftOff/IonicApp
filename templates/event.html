@@ -4,9 +4,10 @@
       <img src="img/logo.png" alt="" class="app-logo" />
     </h1>
     <img src="img/time-clock.png" alt="" class="full-image time-clock" ng-click="showPopup($event)" />
+    <div><b>{{ nextEvent.artist_name }} in {{timeRemaining}}</b></div>    
     <div class="">      
       <div class="" ng-repeat="event in events | filter:{ date: setDate.getDate()}">
-        <b>{{event.artist_name}}</b>: {{event.start_time | date : 'dd-MM-yy hh:mma' : 'UTC'}} to {{event.end_time | date : 'dd-MM-yy hh:mma' : 'UTC'}}
+        <b>{{event.artist_name}}</b>: {{event.start_time | date : 'dd-MM-yy hh:mma' }} to {{event.end_time | date : 'dd-MM-yy hh:mma'}}
       </div>
     </div>   
     <div class="row row-bottom">
