@@ -63,7 +63,7 @@ angular.module('dials.controllers', ['dials.services'])
     });
   };
 
-  $scope.resetDate = function (day) {
+  $scope.resetDate = function (day) {    
     $scope.setDate = day;
   };
   
@@ -87,10 +87,13 @@ angular.module('dials.controllers', ['dials.services'])
     });    
     $scope.nextEvent = _.min(comingEvents, function(data){return data.start_time;});
     $scope.now = new Date().getTime(); 
-    $interval(function () {    
-      $scope.timeRemaining = getDiffTime($scope.nextEvent.start_time - new Date().getTime());
-      console.log($scope.timeRemaining);
-    }, 1000);
+    
+    if(comingEvents && comingEvents.length > 0) {
+      $interval(function () {    
+        $scope.timeRemaining = getDiffTime($scope.nextEvent.start_time - new Date().getTime());
+        console.log($scope.timeRemaining);
+      }, 1000);
+    }
     
   };
 

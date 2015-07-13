@@ -1,0 +1,9 @@
+<ion-header-bar class="bar-stable bar-dark">
+  <h1 class="title">{{ setDate | date : 'EEE | MMM | dd' }}</h1>
+</ion-header-bar>
+<ion-content>
+  <ion-list>
+    <ion-item menu-close ng-repeat="event in events | filter:{ date: setDate.getDate()}">{{event.artist_name}}</ion-item>
+  </ion-list>
+</ion-content>
+</ion-side-menu>
