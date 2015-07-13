@@ -8,20 +8,13 @@
       />
       <line class="hour" y1="0" y2="-45" ng-attr-transform="rotate({{30 * date.getHours() + date.getMinutes() / 2}})" />
       <circle class="clock-inner" r="28" stroke-width="1" />
-      <defs ng-repeat="event in events | filter:{ date: setDate.getDate()}">
+      <defs ng-repeat="event in events | filter:{ date: setDate.getDate()} track by $index">
         <pattern id="{{$index}}" x="0%" y="0%" height="100%" width="100%" viewBox="0 0 16 16">
           <image x="0%" y="0%" width="16" height="16" xlink:href="img/dials-logo.png" ng-attr-transform="rotate({{-(30 * event.hour + event.min / 2)}}, 8, 8)"></image>
         </pattern>
       </defs>
-      <circle ng-repeat="event in events | filter:{ date: setDate.getDate()}" class="medium" cx="0" cy="-33" r="7" fill="url(#{{$index}})" stroke="#ffffff" stroke-width="0.5" ng-attr-transform="rotate({{30 * event.hour + event.min / 2}})"
+      <circle ng-repeat="event in events | filter:{ date: setDate.getDate()} track by $index" class="medium" cx="0" cy="-33" r="7" fill="url(#{{$index}})" stroke="#ffffff" stroke-width="0.5" ng-attr-transform="rotate({{30 * event.hour + event.min / 2}})"
       />
-<!--      <defs>
-        <pattern id="event-image-2" x="0%" y="0%" height="100%" width="100%" viewBox="0 0 16 16">
-          <image x="0%" y="0%" width="16" height="16" xlink:href="img/dials-logo.png" transform="rotate({{-(30 * 7 + 30 / 2)}}, 8, 8)"></image>
-        </pattern>
-      </defs>
-      <circle id="sd" class="medium" cx="0" cy="-33" r="7" fill="url(#event-image-2)" stroke="lightblue" stroke-width="0.5%" transform="rotate({{30 * 7 + 30 / 2}})"
-      />-->
     </g>
   </svg>
   <div class="circle-content">
