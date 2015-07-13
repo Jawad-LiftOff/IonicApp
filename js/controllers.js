@@ -13,7 +13,7 @@ angular.module('dials.controllers', ['dials.services'])
   .controller('EventCtrl', function ($scope, $ionicPopup, $filter, $interval, $timeout, DataManager) {
 
   $scope.init = function () {
-    $scope.today = new Date();    
+    $scope.today = new Date();
     $scope.bold = 'bold';
     $scope.setDate = new Date();
     getSchedule();
@@ -60,11 +60,24 @@ angular.module('dials.controllers', ['dials.services'])
     });
   };
 
+  var getAngle = function (h, m) {
+    h = h >= 12 ? 12 - h : h;
+    var hAngle = 0.5 * (h * 60 + m);
+    var mAngle = 6 * m;
+    var angle = Math.abs(hAngle - mAngle);
+    angle = Math.min(angle, 360 - angle);
+    return angle;
+  };
+
   var getEvents = function () {
     DataManager.events(function (res) {
       _.each(res, function (data) {
+        var date = new Date(data.start_time);
         data.date = new Date(data.start_time).getDate();
-      });
+        data.hour = date.getHours()  >= 12 ? date.getHours() - 12: date.getHours();
+        data.min = date.getMinutes();
+        //data.angle = getAngle(date.getHours(), date.getMinutes());
+      });     
       $scope.events = res;
       countDown();
     });
@@ -98,22 +111,23 @@ angular.module('dials.controllers', ['dials.services'])
     if (comingEvents && comingEvents.length > 0) {
       $interval(function () {
         $scope.timeRemaining = getDiffTime($scope.nextEvent.start_time - new Date().getTime());
-        console.log($scope.timeRemaining);
       }, 1000);
     }
 
   };
-  
+
   $scope.date = new Date();
   $scope.majors = new Array(12);
   $scope.minors = new Array(48);
-
-  var tick = function() {
+  $interval(function () {
     $scope.date = new Date();
-    $timeout(tick, 1000);
-  };
-  $timeout(tick, 1000);
-
+  }, 10000);
   $scope.init();
 
+})
+
+  .directive('ngCustAttr', function () {
+  return function (scope, element, attrs) {
+    element.attr('transform', attrs.ngX);
+  };
 });
