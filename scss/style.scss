@@ -1,0 +1,148 @@
+/*@import "../lib/ionic/scss/ionic";*/
+
+/** {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+*/
+
+.square {
+  position: relative;
+  width: 300px;
+  height: 300px;
+}
+
+svg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.clock-face {
+  stroke: #333;
+  fill: white;
+}
+
+.clock-inner {
+  stroke: #666;
+  fill: #fff;
+}
+
+.minor {
+  stroke: #999;
+  stroke-width: 0.5;
+}
+
+.major {
+  stroke: #333;
+  stroke-width: 0.8;
+}
+
+.hour {
+  stroke: #333;
+}
+
+.circle-content {
+  border: 1px solid #333;
+  border-radius: 50%;
+  box-sizing: border-box;
+  height: 50%;
+  left: 50%;
+  overflow: hidden;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+}
+
+.circle-content-inner {
+  position: relative;
+}
+
+.event-logo {
+  display: block;
+  margin: auto;
+  text-align: center;
+}
+
+/***** Time Box *****/
+.time-box {
+  box-shadow: 0 0 5px #666;
+  margin: 5px 0;
+  padding: 10px 0;
+}
+
+.host-name {
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1;
+  margin: 0;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.time-remaining {
+  color: #888;
+  font-weight: bold;
+  font-size: 32px;
+  line-height: 1;
+  margin: 0;
+  text-align: center;
+}
+
+.clock-dials-logo {
+  display: block;
+  margin: auto;
+  text-align: center;
+}
+
+/* Empty. Add your own CSS if you like */
+.doBlur{
+	-webkit-filter: blur(3px);
+  -moz-filter: blur(3px);
+  -ms-filter: blur(3px);
+  -o-filter: blur(3px);
+  filter: blur(3px);
+}
+
+.app-bg {
+  background: rgba(0, 0, 0, 0) url("../img/bg.jpg") no-repeat scroll 0 0 / cover;
+}
+
+.app-logo {
+  width: 200px;
+  display: block;
+  margin: auto;
+}
+
+.time-clock {
+  cursor: pointer;
+}
+
+.popup-head {
+  border: 0;
+}
+
+.popup-container .popup {
+  background: transparent;
+}
+
+.close-popup {
+  cursor: pointer;
+  display: block;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.bold {
+  font-weight: bolder;
+}
+
+.bigSize {
+  font-size: 24px;
+}
+
+.red{
+  color: red;
+}
