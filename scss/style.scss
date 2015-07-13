@@ -1,7 +1,16 @@
+$black: #000000;
+$white: #ffffff;
+$red-dot: #f74836;
+
+.text-white {
+  color: $white !important;
+}
+
 .square {
+  height: 300px;
+  margin: auto;
   position: relative;
   width: 300px;
-  height: 300px;
 }
 
 svg {
@@ -12,7 +21,7 @@ svg {
 
 .clock-face {
   stroke: #333;
-  fill: white;
+  fill: transparent;
 }
 
 .clock-inner {
@@ -21,17 +30,17 @@ svg {
 }
 
 .minor {
-  stroke: #999;
+  stroke: #403c39;
   stroke-width: 0.5;
 }
 
 .major {
-  stroke: #333;
+  stroke: #44413a;
   stroke-width: 0.8;
 }
 
 .hour {
-  stroke: #333;
+  stroke: #d40008;
 }
 
 .circle-content {
@@ -43,6 +52,9 @@ svg {
   overflow: hidden;
   position: absolute;
   top: 50%;
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   width: 50%;
 }
@@ -97,7 +109,11 @@ svg {
   filter: blur(3px);
 }
 
-.app-bg {
+// .app-bg {
+//   background: rgba(0, 0, 0, 0) url("../img/mock/oddball-bg.jpg") no-repeat scroll 0 0 / cover;
+// }
+
+.pane, .view {
   background: rgba(0, 0, 0, 0) url("../img/mock/oddball-bg.jpg") no-repeat scroll 0 0 / cover;
 }
 
@@ -148,5 +164,57 @@ svg {
     .button {
       color: #fff;
     }
+  }
+
+}
+
+/***** FOOTER *****/
+.bar-footer {
+  background: transparent;
+  height: 100px;
+}
+
+.event-logo {
+  padding: 15px 0 5px;
+
+  img {
+    width: 60%;
+  }
+}
+
+.footer-cal {
+  span {
+    display: block;
+  }
+}
+
+.bold {
+  .cal-day, .cal-date {
+    color: $black;
+    font-weight: bold;
+  }  
+}
+
+.cal-day, .cal-date {
+  color: #626262;
+  font-weight: normal;
+  margin-bottom: 7px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.cal-date {
+  font-size: 30px;
+}
+
+.red-dot {
+  display: block;
+  text-align: center;
+  width: 100%;
+
+  &:before {
+    content: ' \25CF';
+    font-size: 25px;
+    color: $red-dot;
   }
 }

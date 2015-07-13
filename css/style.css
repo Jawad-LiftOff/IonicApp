@@ -1,7 +1,11 @@
+.text-white {
+  color: #ffffff !important; }
+
 .square {
+  height: 300px;
+  margin: auto;
   position: relative;
-  width: 300px;
-  height: 300px; }
+  width: 300px; }
 
 svg {
   position: absolute;
@@ -10,22 +14,22 @@ svg {
 
 .clock-face {
   stroke: #333;
-  fill: white; }
+  fill: transparent; }
 
 .clock-inner {
   stroke: #666;
   fill: #fff; }
 
 .minor {
-  stroke: #999;
+  stroke: #403c39;
   stroke-width: 0.5; }
 
 .major {
-  stroke: #333;
+  stroke: #44413a;
   stroke-width: 0.8; }
 
 .hour {
-  stroke: #333; }
+  stroke: #d40008; }
 
 .circle-content {
   border: 1px solid #333;
@@ -36,6 +40,9 @@ svg {
   overflow: hidden;
   position: absolute;
   top: 50%;
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   width: 50%; }
 
@@ -82,7 +89,7 @@ svg {
   -o-filter: blur(3px);
   filter: blur(3px); }
 
-.app-bg {
+.pane, .view {
   background: transparent url("../img/mock/oddball-bg.jpg") no-repeat scroll 0 0/cover; }
 
 .app-logo {
@@ -124,3 +131,39 @@ svg {
   background: linear-gradient(top, #000000 0%, #b3b5b3 100%); }
   .bar.bar-gradient .button {
     color: #fff; }
+
+/***** FOOTER *****/
+.bar-footer {
+  background: transparent;
+  height: 100px; }
+
+.event-logo {
+  padding: 15px 0 5px; }
+  .event-logo img {
+    width: 60%; }
+
+.footer-cal span {
+  display: block; }
+
+.bold .cal-day, .bold .cal-date {
+  color: #000000;
+  font-weight: bold; }
+
+.cal-day, .cal-date {
+  color: #626262;
+  font-weight: normal;
+  margin-bottom: 7px;
+  text-align: center;
+  text-transform: uppercase; }
+
+.cal-date {
+  font-size: 30px; }
+
+.red-dot {
+  display: block;
+  text-align: center;
+  width: 100%; }
+  .red-dot:before {
+    content: ' \25CF';
+    font-size: 25px;
+    color: #f74836; }
