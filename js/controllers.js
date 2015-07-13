@@ -16,8 +16,14 @@ angular.module('dials.controllers', ['dials.services'])
     $scope.today = new Date();
     $scope.bold = 'bold';
     $scope.setDate = new Date();
+    $scope.date = new Date();
+    $scope.majors = new Array(12);
+    $scope.minors = new Array(48);
     getSchedule();
-    getEvents();
+    getEvents();    
+    $interval(function () {
+      $scope.date = new Date();
+    }, 10000);
   };
 
   $scope.showPopup = function () {
@@ -60,23 +66,13 @@ angular.module('dials.controllers', ['dials.services'])
     });
   };
 
-  var getAngle = function (h, m) {
-    h = h >= 12 ? 12 - h : h;
-    var hAngle = 0.5 * (h * 60 + m);
-    var mAngle = 6 * m;
-    var angle = Math.abs(hAngle - mAngle);
-    angle = Math.min(angle, 360 - angle);
-    return angle;
-  };
-
   var getEvents = function () {
     DataManager.events(function (res) {
       _.each(res, function (data) {
         var date = new Date(data.start_time);
         data.date = new Date(data.start_time).getDate();
         data.hour = date.getHours()  >= 12 ? date.getHours() - 12: date.getHours();
-        data.min = date.getMinutes();
-        //data.angle = getAngle(date.getHours(), date.getMinutes());
+        data.min = date.getMinutes();        
       });     
       $scope.events = res;
       countDown();
@@ -114,14 +110,12 @@ angular.module('dials.controllers', ['dials.services'])
       }, 1000);
     }
 
+  };  
+  
+  $scope.onEventClick = function (event) {
+    alert(event.artist_name);
   };
-
-  $scope.date = new Date();
-  $scope.majors = new Array(12);
-  $scope.minors = new Array(48);
-  $interval(function () {
-    $scope.date = new Date();
-  }, 10000);
+  
   $scope.init();
 
 })
