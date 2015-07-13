@@ -1,12 +1,3 @@
-/*@import "../lib/ionic/scss/ionic";*/
-
-/** {
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-}
-*/
-
 .square {
   position: relative;
   width: 300px;
@@ -107,7 +98,7 @@ svg {
 }
 
 .app-bg {
-  background: rgba(0, 0, 0, 0) url("../img/bg.jpg") no-repeat scroll 0 0 / cover;
+  background: rgba(0, 0, 0, 0) url("../img/mock/oddball-bg.jpg") no-repeat scroll 0 0 / cover;
 }
 
 .app-logo {
