@@ -165,5 +165,5 @@ svg {
   width: 100%; }
   .red-dot:before {
     content: ' \25CF';
-    font-size: 25px;
+    font-size: 15px;
     color: #f74836; }
