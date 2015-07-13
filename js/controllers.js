@@ -1,20 +1,19 @@
 angular.module('dials.controllers', ['dials.services'])
 
-  .controller('AppCtrl', function ($scope, CommunicationManager) {
+  .controller('AppCtrl', function ($scope) {
   var views = ['templates/event.html', 'templates/eventlist.html'];
   var view = 0;
   $scope.contentFilePath = views[view];
   $scope.toggleView = function () {
-    view ^= 1;;
+    view ^= 1;
     $scope.contentFilePath = views[view];
   };
 })
 
-  .controller('EventCtrl', function ($scope, $ionicPopup, $filter, $interval, DataManager, CommunicationManager) {
+  .controller('EventCtrl', function ($scope, $ionicPopup, $filter, $interval, DataManager) {
 
   $scope.init = function () {
-    $scope.today = new Date();
-    $scope.test = CommunicationManager.test || 'HI!!';
+    $scope.today = new Date();    
     $scope.bold = 'bold';
     $scope.setDate = new Date();
     getSchedule();
