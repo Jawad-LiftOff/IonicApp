@@ -1,0 +1,12 @@
+<ion-view view-title="<center>{{ today | date : 'EEE | MMM | dd' }}</center>">
+  <ion-content class="app-bg" style="margin-bottom: 8%;">
+    <div ng-include src="contentFilePath"></div>
+  </ion-content>
+  <ion-footer-bar align-title="left" class="app-bg" style="height: 11%;">
+    <div class="col" ng-class="{bold : day.getDate() == today.getDate()}" ng-repeat="day in daysInWeek track by $index" ng-click="resetDate(day)">
+      <span>{{ day.day }}</span>
+      <span class="bigSize">{{ day.getDate() }}</span>
+      <span class="red" ng-if="day.hasEvent">evn</span>
+    </div>
+  </ion-footer-bar>
+</ion-view>

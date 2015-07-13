@@ -1,16 +1,24 @@
 angular.module('dials.controllers', ['dials.services'])
 
-  .controller('AppCtrl', function ($scope) {
+  .controller('AppCtrl', function ($scope, CommunicationManager) {
+  var views = ['templates/event.html', 'templates/eventlist.html'];
+  var view = 0;
+  $scope.contentFilePath = views[view];
+  $scope.toggleView = function () {
+    view ^= 1;;
+    $scope.contentFilePath = views[view];
+  };
 })
 
-  .controller('EventCtrl', function ($scope, $ionicPopup, $filter, $interval, DataManager) {
+  .controller('EventCtrl', function ($scope, $ionicPopup, $filter, $interval, DataManager, CommunicationManager) {
 
   $scope.init = function () {
     $scope.today = new Date();
+    $scope.test = CommunicationManager.test || 'HI!!';
     $scope.bold = 'bold';
     $scope.setDate = new Date();
     getSchedule();
-    getEvents();    
+    getEvents();
   };
 
   $scope.showPopup = function () {
@@ -25,7 +33,7 @@ angular.module('dials.controllers', ['dials.services'])
     document.getElementsByTagName('ion-nav-view')[0].classList.remove("doBlur");
     $scope.myPopup.close();
   };
-   
+
   $scope.getWeekData = function () {
     var days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
     var thisDay = $scope.today.getDay() == 0 ? 7 : $scope.today.getDay();
@@ -37,9 +45,9 @@ angular.module('dials.controllers', ['dials.services'])
       var day = new Date(new Date().setDate(weekStart.getDate() + i));
       day.day = d;
       var date = (day.getMonth() + 1) + '/' + day.getDate() + '/' + day.getFullYear();
-      var schedules = _.find($scope.schedule, function (data) { 
-                        return new Date(data.date).toDateString() == new Date(date).toDateString() 
-                      });
+      var schedules = _.find($scope.schedule, function (data) {
+        return new Date(data.date).toDateString() == new Date(date).toDateString()
+      });
       day.hasEvent = schedules;
       $scope.daysInWeek.push(day);
     });
@@ -63,38 +71,38 @@ angular.module('dials.controllers', ['dials.services'])
     });
   };
 
-  $scope.resetDate = function (day) {    
+  $scope.resetDate = function (day) {
     $scope.setDate = day;
   };
-  
-  var getDiffTime = function (ms) {    
-    var daysms=ms % (24*60*60*1000);
-    var hours = Math.floor((daysms)/(60*60*1000));
+
+  var getDiffTime = function (ms) {
+    var daysms = ms % (24 * 60 * 60 * 1000);
+    var hours = Math.floor((daysms) / (60 * 60 * 1000));
     hours = hours < 10 ? '0' + hours : hours;
-    var hoursms=ms % (60*60*1000);
-    var minutes = Math.floor((hoursms)/(60*1000));
+    var hoursms = ms % (60 * 60 * 1000);
+    var minutes = Math.floor((hoursms) / (60 * 1000));
     minutes = minutes < 10 ? '0' + minutes : minutes;
-    var minutesms=ms % (60*1000);
-    var sec = Math.floor((minutesms)/(1000));
+    var minutesms = ms % (60 * 1000);
+    var sec = Math.floor((minutesms) / (1000));
     sec = sec < 10 ? '0' + sec : sec;
-    return hours+":"+minutes+":"+sec;
+    return hours + ":" + minutes + ":" + sec;
   };
-  
+
   var countDown = function () {
     var now = new Date();
-    var comingEvents = _.filter($scope.events, function(data) {            
-      return data.start_time > now.getTime(); 
-    });    
-    $scope.nextEvent = _.min(comingEvents, function(data){return data.start_time;});
-    $scope.now = new Date().getTime(); 
-    
-    if(comingEvents && comingEvents.length > 0) {
-      $interval(function () {    
+    var comingEvents = _.filter($scope.events, function (data) {
+      return data.start_time > now.getTime();
+    });
+    $scope.nextEvent = _.min(comingEvents, function (data) { return data.start_time; });
+    $scope.now = new Date().getTime();
+
+    if (comingEvents && comingEvents.length > 0) {
+      $interval(function () {
         $scope.timeRemaining = getDiffTime($scope.nextEvent.start_time - new Date().getTime());
         console.log($scope.timeRemaining);
       }, 1000);
     }
-    
+
   };
 
   $scope.init();

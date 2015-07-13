@@ -26,7 +26,7 @@ angular.module('dials', ['ionic', 'dials.controllers'])
     url: "/event",
     views: {
       'menuContent': {
-        templateUrl: "templates/event.html",
+        templateUrl: "templates/eventlayout.html",
         controller: 'EventCtrl'
       }
     }

@@ -11,4 +11,9 @@ angular.module('dials.services', ['ngResource'])
     });
 
   return service;
+})
+
+.factory('CommunicationManager', function ($resource) {
+  var data = {};
+  return data;
 });
