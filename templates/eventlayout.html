@@ -1,8 +1,8 @@
-<ion-view view-title="<center>{{ today | date : 'EEE | MMM | dd' }}</center>">
-  <ion-content class="app-bg" style="margin-bottom: 8%;">
+<ion-view view-title="<div class='h1 title'>{{ today | date : 'EEE | MMM | dd' }}</div>">
+  <ion-content class="footer-bg">
     <div ng-include src="contentFilePath"></div>
   </ion-content>
-  <ion-footer-bar align-title="left" class="app-bg" style="height: 11%;">
+  <ion-footer-bar align-title="left" class="footer-bg">
     <div class="col" ng-class="{bold : day.getDate() == today.getDate()}" ng-repeat="day in daysInWeek track by $index" ng-click="resetDate(day)">
       <span>{{ day.day }}</span>
       <span class="bigSize">{{ day.getDate() }}</span>
