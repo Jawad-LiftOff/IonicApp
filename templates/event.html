@@ -1,11 +1,37 @@
-<h1>
-  <img src="img/logo.png" alt="" class="app-logo" />
-</h1>
-<img src="img/time-clock.png" alt="" class="full-image time-clock" ng-click="showPopup($event)" />
-<div>
-  <b>{{ nextEvent.artist_name }} in {{timeRemaining}}</b>
-</div>
-<div class="">
-  <div class="" ng-repeat="event in events | filter:{ date: setDate.getDate()}">
-    <b>{{event.artist_name}}, {{test}}</b>: {{event.start_time | date : 'dd-MM-yy hh:mma' }} to {{event.end_time | date : 'dd-MM-yy hh:mma'}}</div>
+<div class="square">
+  <svg viewBox="0 0 100 100">
+    <g transform="translate(50,50)">
+      <circle class="clock-face" r="48" stroke-width="0" />
+      <line ng-repeat="minor in minors track by $index" class="minor" y1="43" y2="45" transform="rotate({{360 * $index / minors.length}})"
+      />
+      <line ng-repeat="major in majors track by $index" class="major" y1="42" y2="45" transform="rotate({{360 * $index / majors.length}})"
+      />
+      <line class="hour" y1="0" y2="-45" transform="rotate({{30 * date.getHours() + date.getMinutes() / 2}})" />
+      <circle class="clock-inner" r="28" stroke-width="1" />
+      <defs>
+        <pattern id="event-image-1" x="0%" y="0%" height="100%" width="100%" viewBox="0 0 16 16">
+          <image x="0%" y="0%" width="16" height="16" xlink:href="http://placehold.it/32" transform="rotate({{-(30 * 1 + 0 / 2)}}, 8, 8)"></image>
+        </pattern>
+      </defs>
+      <circle id="sd" class="medium" cx="0" cy="-33" r="7" fill="url(#event-image-1)" stroke="#ffffff" stroke-width="0.5" transform="rotate({{30 * 1 + 0 / 2}})"
+      />
+      <defs>
+        <pattern id="event-image-2" x="0%" y="0%" height="100%" width="100%" viewBox="0 0 16 16">
+          <image x="0%" y="0%" width="16" height="16" xlink:href="http://placehold.it/32" transform="rotate({{-(30 * 7 + 30 / 2)}}, 8, 8)"></image>
+        </pattern>
+      </defs>
+      <circle id="sd" class="medium" cx="0" cy="-33" r="7" fill="url(#event-image-2)" stroke="lightblue" stroke-width="0.5%" transform="rotate({{30 * 7 + 30 / 2}})"
+      />
+    </g>
+  </svg>
+  <div class="circle-content">
+    <div class="circle-content-inner">
+      <img src="http://placehold.it/100x30" alt="" class="event-logo">
+      <div class="time-box">
+        <p class="host-name">{{ nextEvent.artist_name }} in:</p>
+        <p class="time-remaining">{{timeRemaining}}</p>
+      </div>
+      <img src="http://placehold.it/100x30" alt="" class="clock-dials-logo">
+    </div>
+  </div>
 </div>

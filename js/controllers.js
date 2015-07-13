@@ -10,7 +10,7 @@ angular.module('dials.controllers', ['dials.services'])
   };
 })
 
-  .controller('EventCtrl', function ($scope, $ionicPopup, $filter, $interval, DataManager) {
+  .controller('EventCtrl', function ($scope, $ionicPopup, $filter, $interval, $timeout, DataManager) {
 
   $scope.init = function () {
     $scope.today = new Date();    
@@ -103,6 +103,16 @@ angular.module('dials.controllers', ['dials.services'])
     }
 
   };
+  
+  $scope.date = new Date();
+  $scope.majors = new Array(12);
+  $scope.minors = new Array(48);
+
+  var tick = function() {
+    $scope.date = new Date();
+    $timeout(tick, 1000);
+  };
+  $timeout(tick, 1000);
 
   $scope.init();
 
