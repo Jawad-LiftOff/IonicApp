@@ -2,10 +2,10 @@
   color: #ffffff !important; }
 
 .square {
-  height: 300px;
+  height: auto;
   margin: auto;
   position: relative;
-  width: 300px; }
+  width: 85%; }
 
 .clock-face {
   stroke: #333;
