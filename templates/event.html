@@ -11,24 +11,33 @@
       <line ng-repeat="major in majors track by $index" class="major" y1="42" y2="45" ng-attr-transform="rotate({{360 * $index / majors.length}})"
       />
       <line class="hour" y1="0" y2="-45" ng-attr-transform="rotate({{30 * date.getHours() + date.getMinutes() / 2}})" />
+      
+      <defs>
+        <pattern id="image" x="0" y="0" height="100%" width="100%" viewBox="0 0 100 100">
+          <image x="0" y="0" width="100" height="30%" xlink:href="http://placehold.it/100x30"/>
+          <g transform="translate(50, 50)">
+            <rect x="-50" y="-19%" width="100%" height="38%" fill="#fff" class="svg-shadow" />
+            <text text-anchor="middle" font-weight="bold" x="0" y="-6%" font-family="Verdana" font-size="7" fill="#111111">{{ nextEvent.artist_name }} IN:</text>
+            <text font-weight="bold" text-anchor="middle" x="0" y="12%" font-family="Verdana" font-size="18" fill="#696969">{{timeRemaining}}</text>
+          </g>
+          <image x="0" y="70%" width="100" height="30%" xlink:href="http://placehold.it/100x30"/>
+        </pattern>
+      </defs>
+
+      <circle id="sd" class="clock-cal-content" cx="0" cy="0" r="25" fill="url(#image)"/>
+
       <circle class="clock-inner" r="28" stroke-width="1" />
       <defs ng-repeat="event in events | filter:{ date: setDate.getDate()} track by $index">
         <pattern id="{{$index}}" x="0%" y="0%" height="100%" width="100%" viewBox="0 0 16 16">
-          <image x="0%" y="0%" width="16" height="16" xlink:href="img/dials-logo.png" ng-attr-transform="rotate({{-(30 * event.hour + event.min / 2)}}, 8, 8)"></image>
+          <image x="0%" y="0%" width="16" height="16" xlink:href="img/host.png" ng-attr-transform="rotate({{-(30 * event.hour + event.min / 2)}}, 8, 8)"></image>
         </pattern>
       </defs>
-      <circle ng-repeat="event in events | filter:{ date: setDate.getDate()} track by $index" ng-click="onEventClick(event)" class="medium" cx="0" cy="-33" r="7" fill="url(#{{$index}})" stroke="#ffffff" stroke-width="0.5" ng-attr-transform="rotate({{30 * event.hour + event.min / 2}})"
+
+      <circle ng-repeat="event in events | filter:{ date: setDate.getDate()} track by $index" ng-click="onEventClick(event)" class="medium" cx="0" cy="-32" r="6" fill="url(#{{$index}})" stroke="#ffffff" stroke-width="1" ng-attr-transform="rotate({{30 * event.hour + event.min / 2}})"
       />
+      <image ng-repeat="event in events | filter:{ date: setDate.getDate()} track by $index" x="-12" y="-42" width="24" height="17" xlink:href="img/ring.svg" ng-attr-transform="rotate({{30 * event.hour + event.min / 2}})" />
+        
     </g>
   </svg>
-  <div class="circle-content">
-    <div class="circle-content-inner">
-      <img src="http://placehold.it/100x30" alt="" class="event-logo">
-      <div class="time-box">
-        <p class="host-name">{{ nextEvent.artist_name }} in:</p>
-        <p class="time-remaining">{{timeRemaining}}</p>
-      </div>
-      <img src="http://placehold.it/100x30" alt="" class="clock-dials-logo">
-    </div>
-  </div>
+
 </div>
