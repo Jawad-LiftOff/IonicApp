@@ -105,6 +105,7 @@ angular.module('dials.controllers', ['dials.services'])
     $scope.now = new Date().getTime();
 
     if (comingEvents && comingEvents.length > 0) {
+      $scope.timeRemaining = getDiffTime($scope.nextEvent.start_time - new Date().getTime());
       $interval(function () {
         $scope.timeRemaining = getDiffTime($scope.nextEvent.start_time - new Date().getTime());
       }, 1000);
