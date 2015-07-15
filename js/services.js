@@ -42,9 +42,7 @@ angular.module('dials.services', ['ngResource'])
         day: this.daysOfWeekStrings[moment.day()],
         year: moment.year(),
         hasEvent: _.find(this.eventDates, function(evt) { 
-          if(evt.date() == moment.date() && evt.month() == moment.month() && evt.year() == moment.year()){
-            console.log('evt', evt.date(), evt.month(), evt.year());
-            console.log('moment', moment.date(), moment.month(), moment.year());
+          if(evt.date() == moment.date() && evt.month() == moment.month() && evt.year() == moment.year()){            
             return true;
           } })
       };

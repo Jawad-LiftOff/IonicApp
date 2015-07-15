@@ -1,15 +1,18 @@
 <ion-view view-title="<div class='h1 title text-white'>{{ header }}</div>">
   <ion-content class="app-bg">
     <div ng-include src="contentFilePath"></div>
-    <ion-scroll direction="x" class="available-scroller footer-cal" style="height: 100px;" on-scroll="onScroll()">
-      <div class="photo" collection-repeat="day in daysInWeek" item-height="100" item-width="50">
+    <ion-scroll delegate-handle="small" direction="x" class="available-scroller footer-cal" style="height: 100px;" on-scroll="onScroll()">
+      <div collection-repeat="day in daysInWeek" item-height="100" item-width="50">
         <div class="col" ng-click="resetDate(day)">          
           <span class="cal-day">{{ day.monthName }}</span>
           <span class="cal-day">{{ day.day }}</span>
           <span class="cal-date">{{ day.date }}</span>
           <span class="red-dot" ng-if="day.hasEvent"></span>
         </div>
-      </div>
+      </div>      
     </ion-scroll>
+    <button ng-click="scrollSmallToTop()">
+        Scroll small area to top!
+      </button>
   </ion-content>
 </ion-view>

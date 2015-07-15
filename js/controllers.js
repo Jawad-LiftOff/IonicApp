@@ -25,7 +25,7 @@ angular.module('dials.controllers', ['dials.services'])
   $scope.setHeaders();
 })
 
-  .controller('EventCtrl', function ($scope, $ionicPopup, $filter, $interval, DataManager, Calendar) {
+  .controller('EventCtrl', function ($scope, $ionicPopup, $filter, $interval, $ionicScrollDelegate, DataManager, Calendar) {
   $scope.init = function () {
     $scope.today = new Date();
     $scope.bold = 'bold';    
@@ -128,7 +128,16 @@ angular.module('dials.controllers', ['dials.services'])
   };
 
   $scope.onEventClick = function (event) {
-    alert(event.date);
+    alert(event.artist_name);
+  };
+  
+  $scope.onScroll = function (event) {
+    console.log($ionicScrollDelegate.$getByHandle('small').getScrollPosition().left);
+  };
+  
+   $scope.scrollSmallToTop = function() {
+    $ionicScrollDelegate.$getByHandle('small').scrollTo(0, 0, true);
+    $ionicScrollDelegate.$getByHandle('small').scrollTo((19 * 43.95) + 30, 0, true);
   };
 
   $scope.init();
