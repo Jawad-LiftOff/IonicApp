@@ -28,10 +28,11 @@ angular.module('dials.controllers', ['dials.services'])
   .controller('EventCtrl', function ($scope, $ionicPopup, $filter, $interval, $ionicScrollDelegate, DataManager, Calendar) {
   $scope.init = function () {
     $scope.today = new Date();
-    $scope.bold = 'bold';    
+    $scope.bold = 'bold';
     var momentToday = moment.utc();
     $scope.setDate = momentToday.date() + '-' + momentToday.month() + '-' + momentToday.year(); //new Date();
-    $scope.header = momentToday.date() + '|' + moment.months(momentToday.month()) + '|' + momentToday.year(); //new Date();    
+    $scope.header = momentToday.date() + '|' + moment.months(momentToday.month()) + '|' + momentToday.year(); //new Date();
+    $scope.scrollLeft = 0;
     $scope.date = new Date();
     $scope.majors = new Array(12);
     $scope.minors = new Array(48);
@@ -56,19 +57,26 @@ angular.module('dials.controllers', ['dials.services'])
   };
 
   $scope.getWeekData = function () {
-    var dates = _.map($scope.schedule, function (data) { return moment(data.date) });    
+    var dates = _.map($scope.schedule, function (data) { return moment(data.date) });
     var start = _.min(dates);
-    var end = _.max(dates); 
-    $scope.data = []; 
+    var end = _.max(dates);
+    $scope.data = [];
     $scope.daysInWeek = [];
     while (start.month() <= end.month() && start.year() <= end.year()) {
       var calendar = new Calendar(start.year(), start.month(), dates);
       var cal = calendar.generate();
-      var arr = [];      
+      var arr = [];
       $scope.data.push(arr.concat.apply(arr, cal));
-      start.add(1, 'month');      
+      start.add(1, 'month');
     }
     $scope.daysInWeek = $scope.data.concat.apply($scope.daysInWeek, $scope.data);
+    var now = moment.utc();    
+    _.find($scope.daysInWeek, function (day) {
+      if (day.date == now.date() && day.month == now.month() && day.year == now.year()) {
+        $scope.scrollLeft = day.pos;        
+      }
+    });
+    $ionicScrollDelegate.$getByHandle('small').scrollTo($scope.scrollLeft, 0, true);
   };
 
   var getSchedule = function () {
@@ -87,14 +95,14 @@ angular.module('dials.controllers', ['dials.services'])
         data.hour = date.getHours() >= 12 ? date.getHours() - 12 : date.getHours();
         data.min = date.getMinutes();
       });
-      $scope.events = res;      
+      $scope.events = res;
       countDown();
     });
   };
 
-  $scope.resetDate = function (day) {    
-    $scope.setDate = day.date + '-' + day.month + '-' + day.year;    
-    $scope.header = day.date + "|" + moment.months(day.month) + "|" + day.year; 
+  $scope.resetDate = function (day) {
+    $scope.setDate = day.date + '-' + day.month + '-' + day.year;
+    $scope.header = day.date + "|" + moment.months(day.month) + "|" + day.year;
   };
 
   var getDiffTime = function (ms) {
@@ -130,12 +138,12 @@ angular.module('dials.controllers', ['dials.services'])
   $scope.onEventClick = function (event) {
     alert(event.artist_name);
   };
-  
+
   $scope.onScroll = function (event) {
     console.log($ionicScrollDelegate.$getByHandle('small').getScrollPosition().left);
   };
-  
-   $scope.scrollSmallToTop = function() {
+
+  $scope.scrollSmallToTop = function () {
     $ionicScrollDelegate.$getByHandle('small').scrollTo(0, 0, true);
     $ionicScrollDelegate.$getByHandle('small').scrollTo((19 * 43.95) + 30, 0, true);
   };
