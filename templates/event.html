@@ -12,12 +12,12 @@
       />
       <line class="hour" y1="0" y2="-45" ng-attr-transform="rotate({{30 * date.getHours() + date.getMinutes() / 2}})" />
       <circle class="clock-inner" r="28" stroke-width="1" />
-      <defs ng-repeat="event in events | filter:{ date: setDate.getDate()} track by $index">
+      <defs ng-repeat="event in events | filter:{ date: setDate} track by $index">
         <pattern id="{{$index}}" x="0%" y="0%" height="100%" width="100%" viewBox="0 0 16 16">
           <image x="0%" y="0%" width="16" height="16" xlink:href="img/dials-logo.png" ng-attr-transform="rotate({{-(30 * event.hour + event.min / 2)}}, 8, 8)"></image>
         </pattern>
       </defs>
-      <circle ng-repeat="event in events | filter:{ date: setDate.getDate()} track by $index" ng-click="onEventClick(event)" class="medium" cx="0" cy="-33" r="7" fill="url(#{{$index}})" stroke="#ffffff" stroke-width="0.5" ng-attr-transform="rotate({{30 * event.hour + event.min / 2}})"
+      <circle ng-repeat="event in events | filter:{ date: setDate} track by $index" ng-click="onEventClick(event)" class="medium" cx="0" cy="-33" r="7" fill="url(#{{$index}})" stroke="#ffffff" stroke-width="0.5" ng-attr-transform="rotate({{30 * event.hour + event.min / 2}})"
       />
     </g>
   </svg>
@@ -26,9 +26,11 @@
       <img src="http://placehold.it/100x30" alt="" class="event-logo">
       <div class="time-box">
         <p class="host-name">{{ nextEvent.artist_name }} in:</p>
-        <p class="time-remaining">{{timeRemaining}}</p>
+        <p class="time-remaining">{{ timeRemaining }}</p>
       </div>
       <img src="http://placehold.it/100x30" alt="" class="clock-dials-logo">
     </div>
   </div>
+ 
+  
 </div>

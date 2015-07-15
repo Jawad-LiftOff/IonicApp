@@ -1,5 +1,6 @@
 <ion-list>
-  <ion-item ng-repeat="event in events | filter:{ date: setDate.getDate()}" ng-click="onEventClick(event)">
+  <ion-item ng-repeat="event in events | filter:{ date: setDate}:true" ng-click="onEventClick(event)">
   {{event.artist_name}} {{event.start_time | date : 'hh:mma' }} > {{event.end_time | date : 'hh:mma'}}
+  {{ event.date }}
   </ion-item>
 </ion-list>
