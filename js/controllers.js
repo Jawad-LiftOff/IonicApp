@@ -1,26 +1,42 @@
 angular.module('dials.controllers', ['dials.services'])
 
-  .controller('AppCtrl', function ($scope) {
+  .controller('AppCtrl', function ($scope, $location) {
   var views = ['templates/event.html', 'templates/eventlist.html'];
   var view = 0;
   $scope.contentFilePath = views[view];
+
+  $scope.setHeaders = function () {
+    $scope.showInfoButton = true;
+    $scope.showMenuButton = true;
+    $location.path('/app/event');
+  };
+
   $scope.toggleView = function () {
     view ^= 1;
     $scope.contentFilePath = views[view];
   };
+
+  $scope.gotToAbout = function () {
+    $scope.showInfoButton = false;
+    $scope.showMenuButton = false;
+    $location.path('/app/about');
+  };
+
+  $scope.setHeaders();
 })
 
-  .controller('EventCtrl', function ($scope, $ionicPopup, $filter, $interval, $timeout, DataManager) {
-
+  .controller('EventCtrl', function ($scope, $ionicPopup, $filter, $interval, $ionicScrollDelegate, DataManager, Calendar) {
   $scope.init = function () {
     $scope.today = new Date();
-    $scope.bold = 'bold';
-    $scope.setDate = new Date();
+    $scope.bold = 'bold';    
+    var momentToday = moment.utc();
+    $scope.setDate = momentToday.date() + '-' + momentToday.month() + '-' + momentToday.year(); //new Date();
+    $scope.header = momentToday.date() + '|' + moment.months(momentToday.month()) + '|' + momentToday.year(); //new Date();    
     $scope.date = new Date();
     $scope.majors = new Array(12);
     $scope.minors = new Array(48);
     getSchedule();
-    getEvents();    
+    getEvents();
     $interval(function () {
       $scope.date = new Date();
     }, 10000);
@@ -40,23 +56,19 @@ angular.module('dials.controllers', ['dials.services'])
   };
 
   $scope.getWeekData = function () {
-    var days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-    var thisDay = $scope.today.getDay() == 0 ? 7 : $scope.today.getDay();
-    var weekStartDate = $scope.today.getDate() - (thisDay - 1);
-    var weekStart = new Date(new Date().setDate(weekStartDate));
-
+    var dates = _.map($scope.schedule, function (data) { return moment(data.date) });    
+    var start = _.min(dates);
+    var end = _.max(dates); 
+    $scope.data = []; 
     $scope.daysInWeek = [];
-    _.each(days, function (d, i) {
-      var day = new Date(new Date().setDate(weekStart.getDate() + i));
-      day.day = d;
-      var date = (day.getMonth() + 1) + '/' + day.getDate() + '/' + day.getFullYear();
-      var schedules = _.find($scope.schedule, function (data) {
-        return new Date(data.date).toDateString() == new Date(date).toDateString()
-      });
-      day.hasEvent = schedules;
-      $scope.daysInWeek.push(day);
-    });
-
+    while (start.month() <= end.month() && start.year() <= end.year()) {
+      var calendar = new Calendar(start.year(), start.month(), dates);
+      var cal = calendar.generate();
+      var arr = [];      
+      $scope.data.push(arr.concat.apply(arr, cal));
+      start.add(1, 'month');      
+    }
+    $scope.daysInWeek = $scope.data.concat.apply($scope.daysInWeek, $scope.data);
   };
 
   var getSchedule = function () {
@@ -70,17 +82,19 @@ angular.module('dials.controllers', ['dials.services'])
     DataManager.events(function (res) {
       _.each(res, function (data) {
         var date = new Date(data.start_time);
-        data.date = new Date(data.start_time).getDate();
-        data.hour = date.getHours()  >= 12 ? date.getHours() - 12: date.getHours();
-        data.min = date.getMinutes();        
-      });     
-      $scope.events = res;
+        var momentDate = moment(data.start_time);
+        data.date = momentDate.date() + '-' + momentDate.month() + '-' + momentDate.year();//new Date(data.start_time).getDate();
+        data.hour = date.getHours() >= 12 ? date.getHours() - 12 : date.getHours();
+        data.min = date.getMinutes();
+      });
+      $scope.events = res;      
       countDown();
     });
   };
 
-  $scope.resetDate = function (day) {
-    $scope.setDate = day;
+  $scope.resetDate = function (day) {    
+    $scope.setDate = day.date + '-' + day.month + '-' + day.year;    
+    $scope.header = day.date + "|" + moment.months(day.month) + "|" + day.year; 
   };
 
   var getDiffTime = function (ms) {
@@ -105,23 +119,27 @@ angular.module('dials.controllers', ['dials.services'])
     $scope.now = new Date().getTime();
 
     if (comingEvents && comingEvents.length > 0) {
+      $scope.timeRemaining = getDiffTime($scope.nextEvent.start_time - new Date().getTime());
       $interval(function () {
         $scope.timeRemaining = getDiffTime($scope.nextEvent.start_time - new Date().getTime());
       }, 1000);
     }
 
-  };  
-  
+  };
+
   $scope.onEventClick = function (event) {
     alert(event.artist_name);
   };
   
+  $scope.onScroll = function (event) {
+    console.log($ionicScrollDelegate.$getByHandle('small').getScrollPosition().left);
+  };
+  
+   $scope.scrollSmallToTop = function() {
+    $ionicScrollDelegate.$getByHandle('small').scrollTo(0, 0, true);
+    $ionicScrollDelegate.$getByHandle('small').scrollTo((19 * 43.95) + 30, 0, true);
+  };
+
   $scope.init();
 
-})
-
-  .directive('ngCustAttr', function () {
-  return function (scope, element, attrs) {
-    element.attr('transform', attrs.ngX);
-  };
 });
