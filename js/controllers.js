@@ -118,9 +118,14 @@ angular.module('dials.controllers', ['dials.services'])
     var hours = Math.floor(leftSec / (60 * 60));
     leftSec = leftSec - hours * 60 * 60;
     hours = hours + (days * 24); 
+    hours = hours < 10 ? '0' + hours : hours;
 
     var minutes = Math.floor(leftSec / (60));
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    
     leftSec = leftSec - minutes * 60;
+    leftSec = leftSec < 10 ? '0' + leftSec : leftSec;
+    
     return hours + ":" + minutes + ":" + leftSec;
   };
 
