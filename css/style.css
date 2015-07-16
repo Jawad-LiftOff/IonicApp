@@ -32,19 +32,20 @@
   stroke: #d40008; }
 
 .circle-content {
+  background: #fff none repeat scroll 0 0;
   border: 1px solid #333;
   border-radius: 50%;
   box-sizing: border-box;
-  height: 50%;
+  height: 55%;
   left: 50%;
   overflow: hidden;
   position: absolute;
   top: 50%;
-  -moz-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  width: 50%; }
+  -ms-transform: translate(-50%, -52%);
+  -moz-transform: translate(-50%, -52%);
+  -webkit-transform: translate(-50%, -52%);
+  transform: translate(-50%, -52%);
+  width: 55%; }
 
 .circle-content-inner {
   position: relative; }
@@ -54,11 +55,18 @@
   margin: auto;
   text-align: center; }
 
+.event-clock-logo {
+  display: block;
+  margin: auto;
+  padding: 5px 0 0;
+  text-align: center;
+  width: 75%; }
+
 /***** Time Box *****/
 .time-box {
   box-shadow: 0 0 5px #666;
   margin: 5px 0;
-  padding: 10px 0; }
+  padding: 7px 0; }
 
 .host-name {
   font-size: 12px;
@@ -79,7 +87,8 @@
 .clock-dials-logo {
   display: block;
   margin: auto;
-  text-align: center; }
+  text-align: center;
+  width: 25%; }
 
 /* Empty. Add your own CSS if you like */
 .doBlur {
@@ -171,5 +180,3 @@
 .svg-shadow {
   -webkit-filter: drop-shadow(2px 1px 2px red);
   filter: drop-shadow(2px 1px 2px red); }
-
-/*# sourceMappingURL=style.css.map */

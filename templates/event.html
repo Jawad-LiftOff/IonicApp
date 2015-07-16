@@ -3,6 +3,7 @@
 </div>
 
 <div class="square">
+
   <svg viewBox="0 0 100 100">
     <g transform="translate(50,50)">
       <circle class="clock-face" r="48" stroke-width="0" />
@@ -14,7 +15,7 @@
 
       <image x="-10" y="-45" width="20" height="60" xlink:href="img/clock-hand.svg" ng-attr-transform="rotate({{30 * date.getHours() + date.getMinutes() / 2}})"></image>
       
-      <defs>
+      <!-- <defs>
         <pattern id="clock-inner-cricle" x="0" y="0" height="100%" width="100%" viewBox="0 0 100 100">
           <image x="0" y="0" width="100" height="30%" xlink:href="http://placehold.it/100x30"/>
           <g transform="translate(50, 50)">
@@ -26,9 +27,9 @@
         </pattern>
       </defs>
 
-      <circle id="sd" class="clock-cal-content" cx="0" cy="0" r="25" fill="url(#clock-inner-cricle)"/>
+      <circle id="sd" class="clock-cal-content" cx="0" cy="0" r="28" fill="url(#clock-inner-cricle)"/> -->
 
-      <circle class="clock-inner" r="28" stroke-width="1" />
+      <circle class="clock-inner" r="31" stroke-width="1" />
       <defs ng-repeat="event in events | filter:{ date: setDate} track by $index">
         <pattern id="{{$index}}" x="0%" y="0%" height="100%" width="100%" viewBox="0 0 16 16">
           <image x="0%" y="0%" width="16" height="16" xlink:href="img/host.png" ng-attr-transform="rotate({{-(30 * event.hour + event.min / 2)}}, 8, 8)"></image>
@@ -36,7 +37,24 @@
       </defs>
       <circle ng-repeat="event in events | filter:{ date: setDate} track by $index" ng-click="onEventClick(event)" class="medium" cx="0" cy="-33" r="7" fill="url(#{{$index}})" stroke="#ffffff" stroke-width="0.5" ng-attr-transform="rotate({{30 * event.hour + event.min / 2}})" />
       <image ng-repeat="event in events | filter:{ date: setDate} track by $index" x="-12" y="-42" width="24" height="17" xlink:href="img/ring.svg" ng-attr-transform="rotate({{30 * event.hour + event.min / 2}})" />
-        
+
+      <image x="-10" y="-37" width="20" height="10" xlink:href="img/event-inside.png" ng-attr-transform="rotate({{30 * 2 + 30 / 2}})" /><!-- For Event -->
+      <image x="-12" y="-40" width="24" height="14" xlink:href="img/event.svg" ng-attr-transform="rotate({{30 * 2 + 30 / 2}})" /><!-- For Event -->
+      
     </g>
   </svg>
+
+  <div class="circle-content">
+    <div class="circle-content-inner">
+      <img src="img/oddball-clock-logo.jpg" alt="" class="event-clock-logo">
+        
+    <div class="time-box">
+        <p class="host-name">{{ nextEvent.artist_name }} in:</p>
+        <p class="time-remaining">{{timeRemaining}}</p>
+      </div>
+
+      <img src="img/dials-clock-logo.png" alt="" class="clock-dials-logo">
+    </div>
+  </div>
+
 </div>
