@@ -25,8 +25,9 @@ angular.module('dials.controllers', ['dials.services'])
   $scope.setHeaders();
 })
 
-  .controller('EventCtrl', function ($scope, $ionicPopup, $filter, $interval, $ionicScrollDelegate, DataManager, Calendar) {
+  .controller('EventCtrl', function ($scope, $ionicPopup, $filter, $interval, $ionicScrollDelegate, $ionicLoading, DataManager, Calendar) {
   $scope.init = function () {
+    $scope.showLoading();
     $scope.today = new Date();
     $scope.bold = 'bold';
     var momentToday = moment.utc();
@@ -41,6 +42,16 @@ angular.module('dials.controllers', ['dials.services'])
     $interval(function () {
       $scope.date = new Date();
     }, 10000);
+  };
+  
+  $scope.showLoading = function () {
+    $ionicLoading.show({
+      template: 'Loading...'
+    });
+  };
+  
+  $scope.hideLoading = function(){
+    $ionicLoading.hide();
   };
 
   $scope.showPopup = function () {
@@ -77,12 +88,13 @@ angular.module('dials.controllers', ['dials.services'])
       }
     });
     $ionicScrollDelegate.$getByHandle('small').scrollTo($scope.scrollLeft, 0, true);
+    $scope.hideLoading();
   };
 
   var getSchedule = function () {
     DataManager.schedule(function (res) {
       $scope.schedule = res;
-      $scope.getWeekData();
+      $scope.getWeekData();      
     });
   };
 
@@ -96,7 +108,7 @@ angular.module('dials.controllers', ['dials.services'])
         data.min = date.getMinutes();
       });
       $scope.events = res;
-      countDown();
+      countDown();      
     });
   };
 
@@ -143,7 +155,6 @@ angular.module('dials.controllers', ['dials.services'])
         $scope.timeRemaining = getDiffTime($scope.nextEvent.start_time, new Date().getTime());
       }, 1000);
     }
-
   };
 
   $scope.onEventClick = function (event) {
