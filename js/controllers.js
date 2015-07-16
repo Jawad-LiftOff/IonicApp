@@ -29,7 +29,7 @@ angular.module('dials.controllers', ['dials.services'])
   $scope.init = function () {
     $scope.showLoading();
     $scope.today = new Date();
-    $scope.bold = 'bold';
+    $scope.showEventDetails = false;
     var momentToday = moment.utc();
     $scope.setDate = momentToday.date() + '-' + momentToday.month() + '-' + momentToday.year(); //new Date();
     $scope.header = momentToday.date() + '|' + Calendar.prototype.monthStrings[momentToday.month()] + '|' + momentToday.year(); //new Date();
@@ -113,6 +113,7 @@ angular.module('dials.controllers', ['dials.services'])
   };
 
   $scope.resetDate = function (day) {
+    $scope.showEventDetails = false;
     var selected = _.find($scope.daysInWeek , function(d) { return d.isSelected == true; });
     selected ? selected.isSelected = false : '';
     day.isSelected = true;
@@ -158,7 +159,8 @@ angular.module('dials.controllers', ['dials.services'])
   };
 
   $scope.onEventClick = function (event) {
-    alert(event.artist_name);
+    $scope.showEventDetails = $scope.selectedEvent == event ? !$scope.showEventDetails : true;
+    $scope.selectedEvent = event;    
   };
 
   $scope.onScroll = function (event) {
