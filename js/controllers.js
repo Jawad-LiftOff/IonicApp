@@ -70,10 +70,10 @@ angular.module('dials.controllers', ['dials.services'])
       start.add(1, 'month');
     }
     $scope.daysInWeek = $scope.data.concat.apply($scope.daysInWeek, $scope.data);
-    var now = moment.utc();    
+    var now = moment.utc();
     _.find($scope.daysInWeek, function (day) {
       if (day.date == now.date() && day.month == now.month() && day.year == now.year()) {
-        $scope.scrollLeft = day.pos;        
+        $scope.scrollLeft = day.pos;
       }
     });
     $ionicScrollDelegate.$getByHandle('small').scrollTo($scope.scrollLeft, 0, true);
@@ -105,17 +105,20 @@ angular.module('dials.controllers', ['dials.services'])
     $scope.header = day.date + "|" + moment.months(day.month) + "|" + day.year;
   };
 
-  var getDiffTime = function (ms) {
-    var daysms = ms % (24 * 60 * 60 * 1000);
-    var hours = Math.floor((daysms) / (60 * 60 * 1000));
-    hours = hours < 10 ? '0' + hours : hours;
-    var hoursms = ms % (60 * 60 * 1000);
-    var minutes = Math.floor((hoursms) / (60 * 1000));
-    minutes = minutes < 10 ? '0' + minutes : minutes;
-    var minutesms = ms % (60 * 1000);
-    var sec = Math.floor((minutesms) / (1000));
-    sec = sec < 10 ? '0' + sec : sec;
-    return hours + ":" + minutes + ":" + sec;
+  var getDiffTime = function (date1, date2) {
+    var diff = (date2 - date1) / 1000;
+    diff = Math.abs(Math.floor(diff));
+
+    var days = Math.floor(diff / (24 * 60 * 60));
+    var leftSec = diff - days * 24 * 60 * 60;
+
+    var hours = Math.floor(leftSec / (60 * 60));
+    leftSec = leftSec - hours * 60 * 60;
+    hours = hours + (days * 24); 
+
+    var minutes = Math.floor(leftSec / (60));
+    leftSec = leftSec - minutes * 60;
+    return hours + ":" + minutes + ":" + leftSec;
   };
 
   var countDown = function () {
@@ -127,9 +130,9 @@ angular.module('dials.controllers', ['dials.services'])
     $scope.now = new Date().getTime();
 
     if (comingEvents && comingEvents.length > 0) {
-      $scope.timeRemaining = getDiffTime($scope.nextEvent.start_time - new Date().getTime());
+      $scope.timeRemaining = getDiffTime($scope.nextEvent.start_time, new Date().getTime());
       $interval(function () {
-        $scope.timeRemaining = getDiffTime($scope.nextEvent.start_time - new Date().getTime());
+        $scope.timeRemaining = getDiffTime($scope.nextEvent.start_time, new Date().getTime());
       }, 1000);
     }
 
