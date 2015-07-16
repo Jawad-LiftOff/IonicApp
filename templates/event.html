@@ -10,7 +10,9 @@
       />
       <line ng-repeat="major in majors track by $index" class="major" y1="42" y2="45" ng-attr-transform="rotate({{360 * $index / majors.length}})"
       />
-      <line class="hour" y1="0" y2="-45" ng-attr-transform="rotate({{30 * date.getHours() + date.getMinutes() / 2}})" />
+      <!-- <line class="hour" y1="0" y2="-45" ng-attr-transform="rotate({{30 * date.getHours() + date.getMinutes() / 2}})" /> -->
+
+      <image x="-10" y="-45" width="20" height="60" xlink:href="img/clock-hand.svg" ng-attr-transform="rotate({{30 * date.getHours() + date.getMinutes() / 2}})">
       
       <defs>
         <pattern id="image" x="0" y="0" height="100%" width="100%" viewBox="0 0 100 100">
