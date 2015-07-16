@@ -1,3 +1,20 @@
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  /* 1 */
+  display: table;
+  /* 2 */ }
+
+.clearfix:after {
+  clear: both; }
+
+/**
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+.clearfix {
+  *zoom: 1; }
+
 .text-white {
   color: #ffffff !important; }
 
@@ -48,7 +65,13 @@
   width: 55%; }
 
 .circle-content-inner {
-  position: relative; }
+  position: relative;
+  height: 100%;
+  width: 100%; }
+
+.host-bg {
+  background: url(../img/host-bg.png);
+  background-size: cover; }
 
 .event-logo {
   display: block;
@@ -183,3 +206,30 @@
 
 .item {
   margin-bottom: 5px; }
+
+.host-clock-img {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 75%;
+  transform: translateX(-50%); }
+
+.clock-host-name {
+  color: #000000;
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0;
+  text-transform: uppercase; }
+
+.clock-host-time {
+  color: #7f7f7f;
+  font-size: 10px;
+  font-weight: bold;
+  line-height: 1;
+  margin: 0; }
+
+.host-details {
+  margin: auto;
+  padding: 15px 0 5px;
+  text-align: center;
+  width: 70%; }
