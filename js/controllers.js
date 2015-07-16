@@ -58,8 +58,8 @@ angular.module('dials.controllers', ['dials.services'])
 
   $scope.getWeekData = function () {
     var dates = _.map($scope.schedule, function (data) { return moment(data.date) });
-    var start = moment('07-01-2015');
-    var end = moment('12-31-2015');
+    var start = moment('2015-07-01T00:00:00.000Z');
+    var end = moment('2015-12-31T00:00:00.000Z');
     $scope.data = [];
     $scope.daysInWeek = [];
     while (start.month() <= end.month() && start.year() <= end.year()) {
@@ -69,7 +69,7 @@ angular.module('dials.controllers', ['dials.services'])
       $scope.data.push(arr.concat.apply(arr, cal));
       start.add(1, 'month');
     }
-    $scope.daysInWeek = $scope.data.concat.apply($scope.daysInWeek, $scope.data);
+    $scope.daysInWeek = $scope.data.concat.apply($scope.daysInWeek, $scope.data);    
     var now = moment.utc();
     _.find($scope.daysInWeek, function (day) {
       if (day.date == now.date() && day.month == now.month() && day.year == now.year()) {
