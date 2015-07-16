@@ -221,6 +221,9 @@
 
 .item {
   margin-bottom: 5px; }
+  .item .artist-name, .item .event-duration {
+    display: inline-block;
+    width: 50%; }
 
 .host-clock-img {
   position: absolute;

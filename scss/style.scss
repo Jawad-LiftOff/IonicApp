@@ -297,6 +297,11 @@ $yellow: yellow;
 
 .item {
   margin-bottom: 5px;
+
+  .artist-name, .event-duration {
+    display: inline-block;
+    width: 50%;
+  }
 }
 
 .host-clock-img {
