@@ -44,7 +44,7 @@
     </g>
   </svg>
 
-  <div class="circle-content">
+  <div class="circle-content" ng-hide="showEventDetails">
     <div class="circle-content-inner">
       <div class="event-clock-logo">
         <img src="img/oddball-clock-logo.jpg" alt="" class="">
@@ -64,15 +64,15 @@
     </div>
   </div>
 
-  <!-- <div class="circle-content host-bg">
+  <div class="circle-content host-bg" ng-show="showEventDetails">
       <div class="circle-content-inner">
         <div class="host-details">
-          <h3 class="clock-host-name">Aziz Ansari</h3>
-          <p class="clock-host-time">1:00PM > 3:30PM</p>
+          <h3 class="clock-host-name">{{selectedEvent.artist_name}}</h3>
+          <p class="clock-host-time">{{selectedEvent.start_time | date : 'hh:mma' }} > {{selectedEvent.end_time | date : 'hh:mma'}}</p>
         </div>
 
         <img src="img/event-host.png" alt="" class="host-clock-img">
     </div>
-  </div> -->
+  </div>
 
 </div>
