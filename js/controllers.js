@@ -146,12 +146,7 @@ angular.module('dials.controllers', ['dials.services'])
   };
 
   $scope.onScroll = function (event) {
-    console.log($ionicScrollDelegate.$getByHandle('small').getScrollPosition().left);
-  };
-
-  $scope.scrollSmallToTop = function () {
-    $ionicScrollDelegate.$getByHandle('small').scrollTo(0, 0, true);
-    $ionicScrollDelegate.$getByHandle('small').scrollTo((19 * 43.95) + 30, 0, true);
+//    console.log($ionicScrollDelegate.$getByHandle('small').getScrollPosition().left);
   };
 
   $scope.init();
