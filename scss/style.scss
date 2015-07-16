@@ -1,6 +1,7 @@
 $black: #000000;
 $white: #ffffff;
 $red-dot: #f74836;
+$yellow: yellow;
 
 .text-white {
   color: $white !important;
@@ -149,10 +150,6 @@ $red-dot: #f74836;
   text-transform: uppercase;
 }
 
-.bold {
-  font-weight: bolder;
-}
-
 .bigSize {
   font-size: 24px;
 }
@@ -198,6 +195,13 @@ $red-dot: #f74836;
 .bold {
   .cal-day, .cal-date {
     color: $black;
+    font-weight: bold;
+  }  
+}
+
+.bold-current {
+  .cal-day, .cal-date {
+    color: $yellow;
     font-weight: bold;
   }  
 }

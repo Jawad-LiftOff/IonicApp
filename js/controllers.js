@@ -101,6 +101,9 @@ angular.module('dials.controllers', ['dials.services'])
   };
 
   $scope.resetDate = function (day) {
+    var selected = _.find($scope.daysInWeek , function(d) { return d.isSelected == true; });
+    selected ? selected.isSelected = false : '';
+    day.isSelected = true;
     $scope.setDate = day.date + '-' + day.month + '-' + day.year;
     $scope.header = day.date + "|" + moment.months(day.month) + "|" + day.year;
   };

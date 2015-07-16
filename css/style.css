@@ -112,9 +112,6 @@
   text-align: center;
   text-transform: uppercase; }
 
-.bold {
-  font-weight: bolder; }
-
 .bigSize {
   font-size: 24px; }
 
@@ -147,6 +144,10 @@
 
 .bold .cal-day, .bold .cal-date {
   color: #000000;
+  font-weight: bold; }
+
+.bold-current .cal-day, .bold-current .cal-date {
+  color: yellow;
   font-weight: bold; }
 
 .cal-day, .cal-date {

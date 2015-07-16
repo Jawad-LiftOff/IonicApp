@@ -3,7 +3,7 @@
     <div ng-include src="contentFilePath"></div>
     <ion-scroll delegate-handle="small" direction="x" class="available-scroller footer-cal" style="height: 100px;" on-scroll="onScroll()">
       <div id="{{day.date + '-' + day.month + '-' + day.year}}" collection-repeat="day in daysInWeek" item-height="100" item-width="50">
-        <div class="col" ng-click="resetDate(day)">          
+        <div class="col" ng-class="{'bold': day.isSelected, 'bold-current' : day.isCurrentDate}" ng-click="resetDate(day)">          
           <span class="cal-day">{{ day.monthName }}</span>
           <span class="cal-day">{{ day.day }}</span>
           <span class="cal-date">{{ day.date }}</span>

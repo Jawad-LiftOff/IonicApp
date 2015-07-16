@@ -35,17 +35,19 @@ angular.module('dials.services', ['ngResource'])
     Calendar.prototype.daysOfWeekStrings = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     Calendar.prototype.monthStrings = ["Jan", "Feb", "Apr", "Mar", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
-    Calendar.prototype.createDay = function (moment) {
+    Calendar.prototype.createDay = function (date) {    
+      var today = moment.utc();
       return {
-        month: moment.month(), // [0, 11]
-        monthName: this.monthStrings[moment.month()],
-        date: moment.date(),
-        day: this.daysOfWeekStrings[moment.day()],
-        year: moment.year(),
+        month: date.month(), // [0, 11]
+        monthName: this.monthStrings[date.month()],
+        date: date.date(),
+        day: this.daysOfWeekStrings[date.day()],
+        year: date.year(),
         hasEvent: _.find(this.eventDates, function(evt) { 
-          if(evt.date() == moment.date() && evt.month() == moment.month() && evt.year() == moment.year()){            
+          if(evt.date() == date.date() && evt.month() == date.month() && evt.year() == date.year()){            
             return true;
           } }),
+        isCurrentDate: (date.date() == today.date() && date.month() == today.month() && date.year() == today.year()),
         pos: 45 * index++
       };
     };
