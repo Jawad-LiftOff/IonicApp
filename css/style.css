@@ -80,16 +80,29 @@
 
 .event-clock-logo {
   display: block;
+  height: 30%;
   margin: auto;
   padding: 5px 0 0;
-  text-align: center;
-  width: 75%; }
+  text-align: center; }
+  .event-clock-logo img {
+    width: 75%; }
 
 /***** Time Box *****/
 .time-box {
   box-shadow: 0 0 5px #666;
+  height: 37%;
   margin: 5px 0;
-  padding: 7px 0; }
+  padding: 7px 0;
+  position: relative; }
+
+.time-box-inner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -ms-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); }
 
 .host-name {
   font-size: 12px;
@@ -110,8 +123,10 @@
 .clock-dials-logo {
   display: block;
   margin: auto;
-  text-align: center;
-  width: 25%; }
+  height: 30%;
+  text-align: center; }
+  .clock-dials-logo img {
+    width: 25%; }
 
 /* Empty. Add your own CSS if you like */
 .doBlur {
@@ -212,6 +227,9 @@
   bottom: 0;
   left: 50%;
   width: 75%;
+  -ms-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
   transform: translateX(-50%); }
 
 .clock-host-name {
