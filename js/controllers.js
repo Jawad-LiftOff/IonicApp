@@ -58,8 +58,8 @@ angular.module('dials.controllers', ['dials.services'])
 
   $scope.getWeekData = function () {
     var dates = _.map($scope.schedule, function (data) { return moment(data.date) });
-    var start = _.min(dates);
-    var end = _.max(dates);
+    var start = moment('07-01-2015');
+    var end = moment('12-31-2015');
     $scope.data = [];
     $scope.daysInWeek = [];
     while (start.month() <= end.month() && start.year() <= end.year()) {
