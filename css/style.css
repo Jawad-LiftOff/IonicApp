@@ -180,3 +180,6 @@
 .svg-shadow {
   -webkit-filter: drop-shadow(2px 1px 2px red);
   filter: drop-shadow(2px 1px 2px red); }
+
+.item {
+  margin-bottom: 5px; }
