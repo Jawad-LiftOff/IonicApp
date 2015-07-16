@@ -4,3 +4,8 @@
   {{ event.date }}
   </ion-item>
 </ion-list>
+<ion-list ng-if="(events | filter:{ date: setDate}:true).length == 0">
+  <ion-item>
+    No Events Found
+  </ion-item>
+</ion-list>
