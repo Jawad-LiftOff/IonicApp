@@ -147,8 +147,7 @@
   font-weight: bold; }
 
 .bold-current .cal-day, .bold-current .cal-date {
-  color: yellow;
-  font-weight: bold; }
+  color: yellow; }
 
 .cal-day, .cal-date {
   color: #626262;
@@ -172,3 +171,5 @@
 .svg-shadow {
   -webkit-filter: drop-shadow(2px 1px 2px red);
   filter: drop-shadow(2px 1px 2px red); }
+
+/*# sourceMappingURL=style.css.map */

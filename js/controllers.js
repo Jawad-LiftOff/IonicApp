@@ -31,7 +31,7 @@ angular.module('dials.controllers', ['dials.services'])
     $scope.bold = 'bold';
     var momentToday = moment.utc();
     $scope.setDate = momentToday.date() + '-' + momentToday.month() + '-' + momentToday.year(); //new Date();
-    $scope.header = momentToday.date() + '|' + moment.months(momentToday.month()) + '|' + momentToday.year(); //new Date();
+    $scope.header = momentToday.date() + '|' + Calendar.prototype.monthStrings[momentToday.month()] + '|' + momentToday.year(); //new Date();
     $scope.scrollLeft = 0;
     $scope.date = new Date();
     $scope.majors = new Array(12);
@@ -105,7 +105,7 @@ angular.module('dials.controllers', ['dials.services'])
     selected ? selected.isSelected = false : '';
     day.isSelected = true;
     $scope.setDate = day.date + '-' + day.month + '-' + day.year;
-    $scope.header = day.date + "|" + moment.months(day.month) + "|" + day.year;
+    $scope.header = day.date + "|" + Calendar.prototype.monthStrings[day.month] + "|" + day.year;
   };
 
   var getDiffTime = function (date1, date2) {

@@ -48,6 +48,7 @@ angular.module('dials.services', ['ngResource'])
             return true;
           } }),
         isCurrentDate: (date.date() == today.date() && date.month() == today.month() && date.year() == today.year()),
+        isSelected: (date.date() == today.date() && date.month() == today.month() && date.year() == today.year()),
         pos: 45 * index++
       };
     };
