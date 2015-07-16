@@ -12,10 +12,10 @@
       />
       <!-- <line class="hour" y1="0" y2="-45" ng-attr-transform="rotate({{30 * date.getHours() + date.getMinutes() / 2}})" /> -->
 
-      <image x="-10" y="-45" width="20" height="60" xlink:href="img/clock-hand.svg" ng-attr-transform="rotate({{30 * date.getHours() + date.getMinutes() / 2}})">
+      <image x="-10" y="-45" width="20" height="60" xlink:href="img/clock-hand.svg" ng-attr-transform="rotate({{30 * date.getHours() + date.getMinutes() / 2}})"></image>
       
       <defs>
-        <pattern id="image" x="0" y="0" height="100%" width="100%" viewBox="0 0 100 100">
+        <pattern id="clock-inner-cricle" x="0" y="0" height="100%" width="100%" viewBox="0 0 100 100">
           <image x="0" y="0" width="100" height="30%" xlink:href="http://placehold.it/100x30"/>
           <g transform="translate(50, 50)">
             <rect x="-50" y="-19%" width="100%" height="38%" fill="#fff" class="svg-shadow" />
@@ -26,7 +26,7 @@
         </pattern>
       </defs>
 
-      <circle id="sd" class="clock-cal-content" cx="0" cy="0" r="25" fill="url(#image)"/>
+      <circle id="sd" class="clock-cal-content" cx="0" cy="0" r="25" fill="url(#clock-inner-cricle)"/>
 
       <circle class="clock-inner" r="28" stroke-width="1" />
       <defs ng-repeat="event in events | filter:{ date: setDate} track by $index">
