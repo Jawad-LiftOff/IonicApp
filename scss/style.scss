@@ -13,11 +13,11 @@ $red-dot: #f74836;
   width: 300px;
 }
 
-svg {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
+// svg {
+//   position: absolute;
+//   width: 100%;
+//   height: 100%;
+// }
 
 .clock-face {
   stroke: #333;
@@ -25,8 +25,15 @@ svg {
 }
 
 .clock-inner {
-  stroke: #666;
-  fill: #fff;
+  fill: transparent;
+  stroke: #423e3b;
+  stroke-width: 2;
+}
+
+.clock-cal-content {
+  // fill: #fff;
+  stroke: #000;
+  stroke-width: 1;
 }
 
 .minor {
@@ -217,4 +224,9 @@ svg {
     font-size: 15px;
     color: $red-dot;
   }
+}
+
+.svg-shadow {
+  -webkit-filter: drop-shadow(2px 1px 2px red);
+  filter: drop-shadow(2px 1px 2px red);
 }
