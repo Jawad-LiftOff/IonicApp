@@ -14,6 +14,7 @@ angular.module('dials.services', ['ngResource'])
 })
 
   .factory('Calendar', function () {
+  var index = 0;
   var Calendar = (function () {
     function Calendar(year, month, dates) {  
       this.eventDates = dates;    
@@ -44,7 +45,8 @@ angular.module('dials.services', ['ngResource'])
         hasEvent: _.find(this.eventDates, function(evt) { 
           if(evt.date() == moment.date() && evt.month() == moment.month() && evt.year() == moment.year()){            
             return true;
-          } })
+          } }),
+        pos: 45 * index++
       };
     };
 
